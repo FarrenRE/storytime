@@ -1,0 +1,42 @@
+.Book {
+  background: brown;
+  font-family: serif;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  width: 90vw;
+  height: 90vh;
+}
+
+.spread {
+  background: #fff3cc;
+  background-image: linear-gradient(
+    to right,
+    #fff3cc,
+    #fff9e6 15%,
+    #fff9e6 35%,
+    #ffedb3,
+    #fff9e6 65%,
+    #fff9e6 85%,
+    #fff3cc
+  );
+  border: 1px solid wheat;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100%;
+}
+
+.leaf {
+  height: 100%;
+  width: 50%;
+  position: relative;
+}
+
+.leaf--left {
+  border-right: 2px solid rgba(77, 59, 0, 0.25);
+  padding: 1rem 0 1rem 1rem;
+}
+
+.leaf--right {
+  border-left: 2px solid rgba(77, 59, 0, 0.25);
+  padding: 1rem 1rem 1rem 0;
+}
