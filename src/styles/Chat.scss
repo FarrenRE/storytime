@@ -4,11 +4,90 @@
   justify-content: center;
 }
 
-.Chat.overlay {
+.ChatMessage {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  &[data-author="Stormgren"] {
+    flex-direction: row-reverse;
+    text-align: right;
+    & .author {
+      margin-left: 1rem;
+      margin-right: 0;
+    }
+  }
+}
+
+.ChatSelect {
+  cursor: pointer;
+}
+
+.chat--overlay {
   position: absolute;
+  top: 0;
   width: 100%;
-  height: 100%;
+  height: 90%;
 
   background: rgba(0, 0, 0, 0.6);
   overflow: hidden;
+}
+
+.chat-body--container {
+  background: white;
+  border-radius: 4px;
+  padding: 1em;
+  width: 100%;
+  height: 80vh;
+  max-width: 800px;
+}
+
+.chat-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.chat-messagearea {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.chat-dialogue--select {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid blue;
+  height: 20%;
+  padding: 1rem;
+}
+
+.chat-dialogue--option {
+  cursor: pointer;
+  &:hover {
+    color: darkmagenta;
+  }
+}
+
+.author {
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  margin-right: 1rem;
+  padding: 1rem;
+  height: 50px;
+  width: 50px;
+
+  &#Karellen {
+    background-image: url(https://c1-ebgames.eb-cdn.com.au/merchandising/images/packshots/07eb9e0cb3204201bbb73fd662c95885_Large.png);
+  }
+  &#Stormgren {
+    background-image: url(https://images.gr-assets.com/authors/1574217836p8/1455.jpg);
+  }
+}
+
+.message {
+  width: 100%;
 }
