@@ -1,5 +1,5 @@
 .Book {
-  background: brown;
+  // background: brown;
   font-family: serif;
   margin: 1rem auto;
   padding: 0.5rem;
@@ -23,6 +23,19 @@
   display: flex;
   flex-flow: row nowrap;
   height: 100%;
+}
+
+.cover.spread, .back-cover.spread {
+  background: brown;
+  border: none;
+}
+
+.cover .leaf--left {
+  background: #333;
+}
+
+.back-cover .leaf--right {
+  background: #333;
 }
 
 .leaf {
