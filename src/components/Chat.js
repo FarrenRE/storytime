@@ -1,20 +1,133 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import '../styles/Chat.scss';
 
 import ChatMessage from './ChatMessage.js';
 
-import { initialDialogue, userDialogue, botDialogue } from './dialogue/karellen-1.js';
-
-export default function Chat() {
-  const [messages, setMessages] = useState(initialDialogue);
+export default function Chat(props) {
+  const [messages, setMessages] = useState([]);
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
   const messagesEndRef = useRef(null); // used for smooth scroll
 
+  const [dialogueOptions, setDialogueOptions] = useState([]);
   const [dialogueIndex, setDialogueIndex] = useState(0);
-  const [dialogueOptionValues, setDialogueOptionValues] = useState([]);
+  const [dialogueChoiceWeights, setDialogueChoiceWeights] = useState([]);
 
-  let botDialogueIndex = 0;
+  const dialogueScript = props.dialogue;
+
+    // render option-less message chain
+    const renderScriptedMessages = useCallback(() => {
+      console.log('renderScriptedMessages()');
+      // array to populate initial messages state
+      let newMessages = [];
+      // iterate over dialogue options until messageOptions detected, then cease
+      for( let i=dialogueIndex; i<dialogueScript.length; i++ ) {
+        const d = dialogueScript[i];
+        // render chat messages until options are detected -- user input is then required
+        if( !d["messageOptions"] ) {
+          // message = flavor (if flavor) + message
+          let message = '';
+          if( d.flavor ) {
+            message += d.flavor[dialogueChoiceWeights[dialogueChoiceWeights.length -1]]
+            message += " ";
+          }
+          message += d.message;
+          newMessages.push({
+            "message": message,
+            "author": d.author
+          });
+        }
+        else { break; }
+      }
+      // update message state
+      setMessages(messages.concat(newMessages));
+
+      // increment index
+      setDialogueIndex( dialogueIndex + newMessages.length );
+    }, [dialogueChoiceWeights, dialogueIndex, dialogueScript, messages]);
+
+  // componentDidMount
+  useEffect(() => {
+    console.log('componentDidMount');
+
+    // render initial dialogue sequence
+    let newMessages = [];
+    for( let d of dialogueScript ) {
+      if( !d["messageOptions"] ) {
+        newMessages.push({
+          "message": d.message,
+          "author": d.author
+        });
+      }
+      else { break; }
+    }
+    // update message state
+    setMessages(messages.concat(newMessages));
+    // increment index
+    setDialogueIndex( dialogueIndex + newMessages.length );
+
+  }, []);
+
+  useEffect(() => {
+    console.log(`useEffect [dialogueIndex] | index = ${dialogueIndex}`);
+
+    // based on index, step through dialogue tree
+    function iterateDialogueSequence() {
+      console.log(`iterateDialogueSequence() | index = ${dialogueIndex}`);
+      console.log(dialogueScript[dialogueIndex]);
+      if( dialogueIndex > dialogueScript.length -1 ) {
+        console.log("that's all, folks!");
+      }
+      else if ( dialogueScript[dialogueIndex]["messageOptions"] ) {
+        setDialogueOptions( dialogueScript[dialogueIndex]["messageOptions"] );
+      }
+      else {
+        renderScriptedMessages();
+      }
+    }
+    iterateDialogueSequence();
+
+  }, [dialogueIndex, renderScriptedMessages, dialogueScript]);
+
+    /**
+   * onClick event handler for dialogue options
+   * @param {Event} e | event containing data-attributes
+   */
+  function onDialogueOptionSelect(e) {
+    console.log('onDialogueOptionSelect()');
+    // set values
+    const message = e.target.getAttribute("data-dialogue-message");
+    const weight = e.target.getAttribute("data-dialogue-weight");
+    const author = "Stormgren";
+    console.log(`event values
+      message: ${message}
+      weight: ${weight}
+      author: ${author}`);
+
+    // update array
+    setDialogueChoiceWeights( dialogueChoiceWeights.concat(weight) );
+
+    // render selected message
+    addMessage( message, author );
+
+    // update state
+    setDialogueIndex( dialogueIndex + 1 );
+
+    // remove dialogue options
+    setDialogueOptions([]);
+  }
+
+  // componentDidUpate: [dialogueChoiceWeights]
+  useEffect(()=>{
+    console.log(`componentDidUpdate: [dialogueChoiceWeights]`);
+    console.log( dialogueChoiceWeights );
+  }, [dialogueChoiceWeights]);
+
+  // componentDidUpate: [messages]
+  useEffect(()=>{
+    console.log('componentDidUpdate: [messages]');
+    messagesEndRef.current.scrollIntoView({behavior: "smooth"});
+  }, [messages]);
 
   /**
    * Message setState helper function
@@ -25,49 +138,7 @@ export default function Chat() {
     setMessages(messagesRef.current.concat(
       { message: message, author: author }
     ));
-    messagesEndRef.current.scrollIntoView({behavior: "smooth"});
-  }
-
-  /**
-   * onClick event handler for dialogue options
-   * @param {Event} e | event containing data-attributes
-   */
-  function onDialogueOptionSelect(e) {
-    console.log(`selected option value: ${e.target.getAttribute("data-dialogue-value")}`);
-    // set values
-    const message = e.target.getAttribute("data-dialogue-message");
-    const value = e.target.getAttribute("data-dialogue-value");
-    const author = "Stormgren";
-    console.log(`onDialogueOptionSelect trigger
-      message: ${message}
-      value: ${value}
-      author: ${author}`);
-
-    // render selected message
-    addMessage( message, author );
-
-    // update state
-    setDialogueIndex( dialogueIndex + 1 );
-    setDialogueOptionValues( dialogueOptionValues.concat(value) );
-  }
-
-  // render bot response
-  useEffect(()=>{
-    // render response
-    console.log(`useEffect, ${dialogueOptionValues[0]}`);
-    getBotResponse(dialogueOptionValues[dialogueIndex]);
-  }, [dialogueIndex]);
-
-  /**
-   * Message response based on dialogue select value
-   * @param {Integer} value 
-   */
-  function getBotResponse(value) {
-    console.log(`getBotResponse(${value})`);
-    if( value ) {
-      addMessage(`${ botDialogue[botDialogueIndex].flavor[value] } ${ botDialogue[dialogueIndex].message }`, "Karellen");
-      botDialogueIndex += 1;
-    }
+    // messagesEndRef.current.scrollIntoView({behavior: "smooth"});
   }
 
   return (
@@ -81,15 +152,20 @@ export default function Chat() {
             </div>
           </div>
           <div className="chat-dialogue--select">
-            {userDialogue[dialogueIndex].map(
-              o => 
-              <div
-                className="chat-dialogue--option"
-                onClick={onDialogueOptionSelect}
-                data-dialogue-value={o.value}
-                data-dialogue-message={o.message}>
-                  {o.message}
-              </div> )}
+            {
+              dialogueOptions ?
+                dialogueOptions.map(
+                  o => 
+                  <div
+                    className="chat-dialogue--option"
+                    onClick={onDialogueOptionSelect}
+                    data-dialogue-weight={o.weight}
+                    data-dialogue-message={o.message}>
+                      {o.message}
+                  </div> )
+                :
+                ''
+              }
           </div>
         </div>
       </div>
