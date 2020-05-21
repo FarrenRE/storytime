@@ -141,6 +141,14 @@ export default function Chat(props) {
     // messagesEndRef.current.scrollIntoView({behavior: "smooth"});
   }
 
+  // destroy chat and send relevant information to parent
+  function terminateDialogue() {
+    // send dialogue choices to parent
+    props.getChatWeight(dialogueChoiceWeights);
+    // close chat
+    props.setChatDisplay(0);
+  }
+
   return (
     <div className="Chat chat--overlay">
       <div className="chat-body--container">
@@ -166,6 +174,7 @@ export default function Chat(props) {
                 :
                 ''
               }
+              {dialogueIndex > dialogueScript.length -1 ? <button onClick={ terminateDialogue }>Terminate dialogue sequence</button> : "" }
           </div>
         </div>
       </div>
