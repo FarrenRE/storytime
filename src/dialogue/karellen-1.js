@@ -139,6 +139,45 @@ const dialogue = [
       "-1": "Oh, you humans...",
       "1": "You got me there!"
     }
+  },
+  {
+    "author": "Stormgren",
+    "messageOptions": [
+      {
+        "message": "test",
+        "weight": "-1"
+      },
+      {
+        "message": "untest",
+        "weight": "1"
+      }
+    ]
+  },
+  {
+    "author": "Stormgren",
+    "messageOptions": [
+      {
+        "message": "test",
+        "weight": "-1"
+      },
+      {
+        "message": "untest",
+        "weight": "1"
+      }
+    ]
+  },
+  {
+    "author": "Stormgren",
+    "messageOptions": [
+      {
+        "message": "test",
+        "weight": "-1"
+      },
+      {
+        "message": "untest",
+        "weight": "1"
+      }
+    ]
   }
 ]
 
