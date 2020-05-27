@@ -7,3 +7,37 @@ body, html {
   margin: 0;
   padding: 0;
 }
+
+.button {
+  cursor: pointer;
+  padding: 0.5rem;
+  text-decoration: none;
+  transition: .2s all;
+
+  &:hover {
+    background: #333;
+    color: #fff;
+  }
+}
+
+.dialogue-button {
+  background: lightgrey;
+  color: black;
+  font-family: 'Press Start 2P', monospace;
+
+  &:hover {
+    background: #222;
+    color: lime;
+  }
+}
+
+.dialogue-button__inverted {
+  background: #222;
+  color: lime;
+  font-family: 'Press Start 2P', monospace;
+
+  &:hover {
+    background: lightgrey;
+    color: black;
+  }
+}

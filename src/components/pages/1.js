@@ -3,9 +3,9 @@ import React from 'react';
 function front() {
   return (
     <div className="page-content">
-      <h1>First contact</h1>
-      <p>You are Rikki Stormgren and a lot of things have happened.........</p>
-      <p>Speak to the Overlord named Karellen</p>
+      <h1>Chapter 1</h1>
+      <p>The volcano that had reared Tratua up from the Pacific depths had been sleeping now for half a million years. Yet in a little while, the island would be bathed with fires fiercer than any that had attended its birth.</p>
+      <p>Perched on a rocky outcrop was a pyramid of scaffolding that supported the USS “John Henry”, as much a symbol of progress as one of stagnancy. As the human race exploited the Earth, so too would they exploit the stars -- or in this case an asteroid.</p>
     </div>
   );
 }

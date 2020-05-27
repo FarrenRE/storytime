@@ -152,6 +152,9 @@ export default function Chat(props) {
   return (
     <div className="Chat chat--overlay">
       <div className="chat-body--container">
+        <div className="chat-title">
+          <h1>Karellen .......... Stormgren</h1>
+        </div>
         <div className="chat-body">
           <div className="chat-messagearea">
             <div className="chat-messagearea--container">
@@ -174,7 +177,15 @@ export default function Chat(props) {
                 :
                 ''
               }
-              {dialogueIndex > dialogueScript.length -1 ? <button onClick={ terminateDialogue }>Terminate dialogue sequence</button> : "" }
+              {
+                dialogueIndex > dialogueScript.length -1
+                ? <div
+                    onClick={ terminateDialogue }
+                    className="button dialogue-button__inverted">
+                      Terminate dialogue sequence
+                  </div> 
+                : "" 
+              }
           </div>
         </div>
       </div>

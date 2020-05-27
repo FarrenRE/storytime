@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import UIfx from 'uifx';
+import pageTurnAudio from '../audio/page-turn.wav';
 import '../styles/Book.scss';
 import '../styles/Page.scss';
 import FlipPage from 'react-flip-page';
@@ -83,21 +85,37 @@ export default function Book() {
     console.log(childElements);
   }, [childElements]);
 
+  const pageTurnSound = new UIfx(
+    pageTurnAudio,
+    { volume: 0.4 }
+  );
+
   return (
     <div className="Book">
         <FlipPage
           orientation="horizontal"
           uncutPages="true"
-          animationDuration={400}
-          responsive="true"
+          animationDuration={750}
+          width={1200}
+          height={800}
           perspective="300em"
           maxAngle="0"
           flipOnTouch="true"
-          flipOnTouchZone={ chatDisplay === 0 ? 25 : 0 }
+          flipOnTouchZone={ chatDisplay === 0 ? 5 : 0 }
           disableSwipe="true"
-          onStartPageChange={(i, d) => { console.log(`onStartPageChange() | oldIndex: ${i}, dir: ${d}`); }}
+          style={{margin: "auto"}}
+          onStartPageChange={(i, d) => { 
+            console.log(`onStartPageChange() | oldIndex: ${i}, dir: ${d}`);
+            if( ( i === 0 && d === 'next' ) || ( i === 1 && d === 'prev' ) ) {
+              // console.log("don't play sound");
+            }
+            else {
+              // console.log('play sound');
+              pageTurnSound.play();
+            }
+          }}
           onPageChange={(i, d) => { console.log(`onPageChange() | index: ${i}, dir: ${d}`); }}
-          swipeImmune={['chat--overlay', '.Chat', 'chat-dialogue--select', 'chat-dialogue--option']}
+          swipeImmune={['chat--overlay', '.Chat', 'chat-dialogue--select', 'chat-dialogue--option', 'button']}
         >
           { childElements }
         </FlipPage>
