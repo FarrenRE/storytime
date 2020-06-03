@@ -13,7 +13,7 @@ function right() {
     <div className="title-page">
       <h1>Crisis<br />Averted</h1>
       <p>A tale of two civilisations</p>
-      <small>Inspired by <i>Childhood's End</i> by Arthur C. Clarke</small>
+      <small>Adapted from <i>Childhood's End</i> by Arthur C. Clarke</small>
     </div>
   );
 }

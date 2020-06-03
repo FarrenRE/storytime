@@ -7,16 +7,26 @@ import FlipPage from 'react-flip-page';
 import Chat from './Chat';
 import Spread from './Spread';
 import ChatToggle from './ChatToggle';
-import { dialogue as chapterOneChat } from '../dialogue/karellen-1';
+import { dialogue as chapterOneChat } from '../dialogue/wainwright-1';
+import { dialogue as chapterTwoChat } from '../dialogue/karellen-1';
+import { dialogue as chapterThreeChat } from '../dialogue/karellen-2';
 
-import {left as coverLeft} from './pages/cover.js';
-import {right as coverRight} from './pages/cover.js';
-import {front as page1Front} from './pages/1.js';
-import {back as page1Back} from './pages/1.js';
-import {front as page2Front} from './pages/2.js';
-import {back as page2Back} from './pages/2.js';
-import {front as page3Front} from './pages/3.js';
-import {back as page3Back} from './pages/3.js';
+import {left as coverLeft, right as coverRight} from './pages/cover';
+import {left as page1Left, right as page1Right} from './pages/1';
+import {left as page2Left, right as page2Right} from './pages/2';
+import {left as page3Left, right as page3Right} from './pages/3';
+import {left as page4Left, right as page4Right} from './pages/4';
+import {left as page5Left, right as page5Right} from './pages/5';
+import {left as page6Left, right as page6Right} from './pages/6';
+import {left as page7Left, right as page7Right} from './pages/7';
+import {left as page8Left, right as page8Right} from './pages/8';
+import {left as page9Left, right as page9Right} from './pages/9';
+import {left as page10Left, right as page10Right} from './pages/10';
+import {left as page11Left, right as page11Right} from './pages/11';
+import {left as page12Left, right as page12Right} from './pages/12';
+import {left as page13Left, right as page13Right} from './pages/13';
+import {left as page14Left, right as page14Right} from './pages/14';
+import {left as page15Left, right as page15Right} from './pages/15';
 
 export default function Book() {
 
@@ -39,9 +49,24 @@ export default function Book() {
       cover={true}
     />,
     <Spread
-      left={ page1Front() }
-      right={ page1Back() }
-      button={ <ChatToggle handleChatToggle={setChatDisplayFromChild} /> }
+      left={ page14Left() }
+      right={ page14Right() }
+    />,
+    <Spread
+      left={ page2Left() }
+      right={ page2Right() }
+    />,
+    <Spread
+      left={ page3Left() }
+      right={ page3Right() }
+    />,
+    <Spread
+      left={ page4Left() }
+      right={ page4Right() }
+      buttonRight={ 
+        <ChatToggle 
+          handleChatToggle={setChatDisplayFromChild}
+          chatIndex={1} /> }
     />
   ];
 
@@ -56,22 +81,53 @@ export default function Book() {
       case 1:
         setChildElements( childElements => childElements.concat([
           <Spread
-            left={ page2Front() }
-            right={ page2Back() }
-          />,
-          <Spread
-            left={ page3Front() }
-            right={ page3Back() }
-          />
+          left={ page5Left() }
+          right={ page5Right() }
+        />,
+        <Spread
+          left={ page6Left() }
+          right={ page6Right() }
+          buttonRight={ 
+            <ChatToggle 
+              handleChatToggle={setChatDisplayFromChild}
+              chatIndex={2} /> }
+        />
         ]) );
         break;
       case 2:
         setChildElements( childElements => childElements.concat([
           <Spread
-            left={ page2Front() }
-            right={ page2Back() }
-            cover={true}
-          />
+            left={ page7Left() }
+            right={ page7Right() }
+          />,
+          <Spread
+            left={ page8Left() }
+            right={ page8Right() }
+          />,
+          <Spread
+            left={ page9Left() }
+            right={ page9Right() }
+          />,
+          <Spread
+            left={ page10Left() }
+            right={ page10Right() }
+          />,
+          <Spread
+            left={ page11Left() }
+            right={ page11Right() }
+          />,
+          <Spread
+            left={ page12Left() }
+            right={ page12Right() }
+          />,
+          <Spread
+            left={ page13Left() }
+            right={ page13Right() }
+            buttonLeft={ 
+              <ChatToggle 
+                handleChatToggle={setChatDisplayFromChild}
+                chatIndex={3} /> }
+          />,
         ]) );
         break;
       default:
@@ -122,6 +178,21 @@ export default function Book() {
         {chatDisplay === 1
           ? <Chat
               dialogue={chapterOneChat}
+              antagonist={"Alexander Wainwright"}
+              getChatWeight={getChatWeight}
+              setChatDisplay={setChatDisplayFromChild} /> 
+          : ""}
+        {chatDisplay === 2
+          ? <Chat
+              dialogue={chapterTwoChat}
+              antagonist={"Overlord Karellen"}
+              getChatWeight={getChatWeight}
+              setChatDisplay={setChatDisplayFromChild} /> 
+          : ""}
+        {chatDisplay === 3
+          ? <Chat
+              dialogue={chapterThreeChat}
+              antagonist={"Overlord Karellen"}
               getChatWeight={getChatWeight}
               setChatDisplay={setChatDisplayFromChild} /> 
           : ""}

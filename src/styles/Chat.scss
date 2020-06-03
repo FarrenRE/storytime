@@ -10,7 +10,10 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3.5rem;
+
+  animation: fade-in 1s linear forwards;
+  opacity: 0;
 
   &[data-author="Stormgren"] {
     flex-direction: row-reverse;
@@ -20,6 +23,35 @@
       margin-right: 0;
     }
   }
+
+  // & + .ChatMessage {
+  //   animation-delay: 2s;
+  // }
+}
+
+.ChatMessage + .ChatMessage[data-author="Karellen"] {
+  animation-delay: 2s;
+  & + .ChatMessage[data-author="Karellen"] {
+    animation-delay: 4s;
+    & + .ChatMessage[data-author="Karellen"] {
+      animation-delay: 6s;
+    }
+  }
+}
+
+.ChatMessage + .ChatMessage[data-author="Wainwright"] {
+  animation-delay: 2s;
+  & + .ChatMessage[data-author="Wainwright"] {
+    animation-delay: 4s;
+    & + .ChatMessage[data-author="Wainwright"] {
+      animation-delay: 6s;
+    }
+  }
+}
+
+@keyframes fade-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 .ChatSelect {
@@ -40,26 +72,42 @@
 .chat-body--container {
   background: black;
   color: white;
-  border-radius: 8px;
+  border: 1px solid lime;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: 1rem 2rem;
   width: 100%;
   height: 100%;
 }
 
 .chat-title h1 {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
   font-family: 'Press Start 2P', monospace;
 }
 
 .chat-body {
   display: flex;
   flex-direction: column;
-  height: 88%;
+  border: 1px solid lime;
+  border-radius: 4px;
+  height: 100%;
   width: 100%;
+  padding: 1rem;
 }
 
 .chat-messagearea {
   height: 80%;
   overflow-y: scroll;
+  position: relative;
+}
+
+.chat-messagearea--container {
+  position: absolute;
+  width: 100%;
 }
 
 .chat-dialogue--select {
@@ -67,6 +115,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   border: 1px solid lime;
+  border-radius: 4px;
   height: 20%;
   padding: 1rem;
 }
@@ -74,7 +123,7 @@
 .chat-dialogue--option {
   cursor: pointer;
   &:hover {
-    color: darkmagenta;
+    color: aqua;
   }
 }
 
@@ -88,18 +137,21 @@
   border-radius: 50%;
   margin-right: 1rem;
   padding: 1rem;
-  height: 50px;
-  width: 50px;
+  height: 120px;
+  width: 120px;
 
   &#Karellen {
-    background-image: url(https://c1-ebgames.eb-cdn.com.au/merchandising/images/packshots/07eb9e0cb3204201bbb73fd662c95885_Large.png);
+    background-image: url(../avatars/avatar_karellen.jpg);
   }
   &#Stormgren {
-    background-image: url(https://images.gr-assets.com/authors/1574217836p8/1455.jpg);
+    background-image: url(../avatars/avatar_stormgren.jpg);
+  }
+  &#Wainwright {
+    background-image: url(../avatars/avatar_wainwright.jpg);
   }
 }
 
 .message {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1400px;
 }

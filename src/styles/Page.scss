@@ -4,6 +4,7 @@ h1, h2, h3 {
 
 .page-content {
   margin: 3rem;
+  position: relative;
 }
 
 .page-content p {
@@ -12,8 +13,12 @@ h1, h2, h3 {
   text-align: justify;
 
   &:first-of-type {
-    text-indent: 1rem;
+    // text-indent: 1rem;
   }
+}
+
+h1 + p {
+  text-indent: 1rem;
 }
 
 .page {
@@ -39,4 +44,43 @@ h1, h2, h3 {
     font-family: 'Cinzel Decorative', serif;
     font-size: 1.5rem;
   }
+}
+
+.page-image {
+  max-width: 100%;
+}
+
+.image-reveal {
+  display: block;
+}
+
+.image-reveal img {
+  position: absolute;
+}
+
+.image-reveal::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  animation: reveal 4s forwards;
+  z-index: 99;
+}
+
+#reveal-first {
+  z-index: 1;
+}
+
+#reveal-second {
+  position: absolute;
+  z-index: -1;
+}
+
+@keyframes reveal {
+  0% { background: rgba(0, 0, 0, 1) }
+  90% { background: rgba(0, 0, 0, 1) }
+  95% { background: rgba(255, 255, 255, .15) }
+  100% { background: rgba(0, 0, 0, 1) }
 }

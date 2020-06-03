@@ -14,10 +14,11 @@ export default function Chat(props) {
   const [dialogueChoiceWeights, setDialogueChoiceWeights] = useState([]);
 
   const dialogueScript = props.dialogue;
+  const logging = false;
 
     // render option-less message chain
     const renderScriptedMessages = useCallback(() => {
-      console.log('renderScriptedMessages()');
+      if(logging) { console.log('renderScriptedMessages()'); }
       // array to populate initial messages state
       let newMessages = [];
       // iterate over dialogue options until messageOptions detected, then cease
@@ -48,7 +49,7 @@ export default function Chat(props) {
 
   // componentDidMount
   useEffect(() => {
-    console.log('componentDidMount');
+    if(logging) {console.log('componentDidMount');}
 
     // render initial dialogue sequence
     let newMessages = [];
@@ -69,14 +70,14 @@ export default function Chat(props) {
   }, []);
 
   useEffect(() => {
-    console.log(`useEffect [dialogueIndex] | index = ${dialogueIndex}`);
+    if(logging) {console.log(`useEffect [dialogueIndex] | index = ${dialogueIndex}`);}
 
     // based on index, step through dialogue tree
     function iterateDialogueSequence() {
-      console.log(`iterateDialogueSequence() | index = ${dialogueIndex}`);
-      console.log(dialogueScript[dialogueIndex]);
+      if(logging) {console.log(`iterateDialogueSequence() | index = ${dialogueIndex}`);}
+      if(logging) {console.log(dialogueScript[dialogueIndex]);}
       if( dialogueIndex > dialogueScript.length -1 ) {
-        console.log("that's all, folks!");
+        if(logging) {console.log("that's all, folks!");}
       }
       else if ( dialogueScript[dialogueIndex]["messageOptions"] ) {
         setDialogueOptions( dialogueScript[dialogueIndex]["messageOptions"] );
@@ -94,15 +95,15 @@ export default function Chat(props) {
    * @param {Event} e | event containing data-attributes
    */
   function onDialogueOptionSelect(e) {
-    console.log('onDialogueOptionSelect()');
+    if(logging) {console.log('onDialogueOptionSelect()');}
     // set values
     const message = e.target.getAttribute("data-dialogue-message");
     const weight = e.target.getAttribute("data-dialogue-weight");
     const author = "Stormgren";
-    console.log(`event values
+    if(logging) {console.log(`event values
       message: ${message}
       weight: ${weight}
-      author: ${author}`);
+      author: ${author}`);}
 
     // update array
     setDialogueChoiceWeights( dialogueChoiceWeights.concat(weight) );
@@ -119,13 +120,15 @@ export default function Chat(props) {
 
   // componentDidUpate: [dialogueChoiceWeights]
   useEffect(()=>{
-    console.log(`componentDidUpdate: [dialogueChoiceWeights]`);
-    console.log( dialogueChoiceWeights );
+    if(logging) {
+      console.log(`componentDidUpdate: [dialogueChoiceWeights]`);
+      console.log( dialogueChoiceWeights );
+    }
   }, [dialogueChoiceWeights]);
 
   // componentDidUpate: [messages]
   useEffect(()=>{
-    console.log('componentDidUpdate: [messages]');
+    if(logging) {console.log('componentDidUpdate: [messages]');}
     messagesEndRef.current.scrollIntoView({behavior: "smooth"});
   }, [messages]);
 
@@ -153,12 +156,18 @@ export default function Chat(props) {
     <div className="Chat chat--overlay">
       <div className="chat-body--container">
         <div className="chat-title">
-          <h1>Karellen .......... Stormgren</h1>
+          <h1><span>{props.antagonist}</span><span>Rikki Stormgren</span></h1>
         </div>
         <div className="chat-body">
           <div className="chat-messagearea">
             <div className="chat-messagearea--container">
-              {messages.map( m => <ChatMessage message={m.message} author={m.author} /> )}
+              {messages.map( 
+                m => 
+                  <ChatMessage 
+                    message={m.message} 
+                    author={m.author} 
+                    index={dialogueIndex} /> 
+                )}
               <div ref={messagesEndRef}></div>
             </div>
           </div>
@@ -179,11 +188,11 @@ export default function Chat(props) {
               }
               {
                 dialogueIndex > dialogueScript.length -1
-                ? <div
+                ? <div><span
                     onClick={ terminateDialogue }
                     className="button dialogue-button__inverted">
                       Terminate dialogue sequence
-                  </div> 
+                  </span></div>
                 : "" 
               }
           </div>
