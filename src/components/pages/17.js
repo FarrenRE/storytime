@@ -17,7 +17,7 @@ function left() {
         <li>Bulb flash courtesy of <a href="https://freesound.org/people/Splatez07/sounds/413690/" target="_blank" rel="noopener noreferrer">Splatez07</a></li>
         <li>Fuse effect courtesy of <a href="https://freesound.org/people/LordForklift/sounds/448394/" target="_blank" rel="noopener noreferrer">LordForklift</a></li>
         <li>Select sound courtesy of <a href="https://freesound.org/people/TiesWijnen/sounds/413310/" target="_blank" rel="noopener noreferrer">TiesWijnen</a></li>
-        <li>Radio sound courtest of <a href="https://freesound.org/people/ERH/sounds/44808/" target="_blank" rel="noopener noreferrer">ERH</a></li>
+        <li>Radio sound courtesy of <a href="https://freesound.org/people/ERH/sounds/44808/" target="_blank" rel="noopener noreferrer">ERH</a></li>
       </ul>
     </div>
   );
