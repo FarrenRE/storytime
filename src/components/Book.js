@@ -27,15 +27,19 @@ import {left as page12Left, right as page12Right} from './pages/12';
 import {left as page13Left, right as page13Right} from './pages/13';
 import {left as page14Left, right as page14Right} from './pages/14';
 import {left as page15Left, right as page15Right} from './pages/15';
+import {left as page16Left, right as page16Right} from './pages/16';
+import {left as page17Left, right as page17Right} from './pages/17';
 
 export default function Book() {
 
   const [chatDisplay, setChatDisplay] = useState(0);
   const [childElements, setChildElements] = useState([]);
+  const [chatWeights, setChatWeights] = useState([]);
 
   const getChatWeight = (weights) => {
     console.log("Chat weights:");
     console.log(weights);
+    setChatWeights( chatWeights.concat(weights) )
   }
 
   const setChatDisplayFromChild = ( newState ) => {
@@ -49,8 +53,8 @@ export default function Book() {
       cover={true}
     />,
     <Spread
-      left={ page14Left() }
-      right={ page14Right() }
+      left={ page1Left() }
+      right={ page1Right() }
     />,
     <Spread
       left={ page2Left() }
@@ -130,6 +134,27 @@ export default function Book() {
           />,
         ]) );
         break;
+      case 3:
+        setChildElements( childElements => childElements.concat([
+          <Spread
+            left={ page14Left() }
+            right={ page14Right() }
+          />,
+          <Spread
+            left={ page15Left() }
+            right={ page15Right() }
+          />,
+          <Spread
+            left={ page16Left() }
+            right={ page16Right() }
+            finalWeights={ chatWeights }
+          />,
+          <Spread
+            left={ page17Left() }
+            right={ page17Right() }
+          />
+        ]) );
+        break;
       default:
         console.log(`chatDisplay defaulted at ${chatDisplay}`);
         break;
@@ -160,6 +185,7 @@ export default function Book() {
           flipOnTouchZone={ chatDisplay === 0 ? 5 : 0 }
           disableSwipe="true"
           style={{margin: "auto"}}
+          showTouchHint={true}
           onStartPageChange={(i, d) => { 
             console.log(`onStartPageChange() | oldIndex: ${i}, dir: ${d}`);
             if( ( i === 0 && d === 'next' ) || ( i === 1 && d === 'prev' ) ) {
