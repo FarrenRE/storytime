@@ -11,10 +11,11 @@ h1, h2, h3 {
   font-family: 'Merriweather', serif;
   line-height: 1.75;
   text-align: justify;
+}
 
-  &:first-of-type {
-    // text-indent: 1rem;
-  }
+.page-content li {
+  font-family: 'Merriweather', serif;
+  line-height: 1.75;
 }
 
 h1 + p {

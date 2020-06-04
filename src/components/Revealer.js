@@ -28,31 +28,31 @@ export default function Revealer(props) {
   useEffect(()=>{
     console.log(`count updated to ${count}`);
     if( count === 1 ) {
-      setImageSrc( 'images/reveal-body.jpg' );
+      setImageSrc( '/images/reveal-body.jpg' );
       setAnimate( true );
       flashSound.play();
       setButtonText('Prime flash!');
     }
     else if( count === 2 ) {
-      setImageSrc( 'images/reveal-black.jpg' );
+      setImageSrc( '/images/reveal-black.jpg' );
       setAnimate( false );
       switchSound.play();
       setButtonText('Again!');
     }
     else if( count === 3 ) {
-      setImageSrc( 'images/reveal-face.jpg' );
+      setImageSrc( '/images/reveal-face.jpg' );
       setAnimate( true );
       flashSound.play();
       setButtonText('Prime flash!');
     }
-    else {
-      setImageSrc( 'images/reveal-black.jpg' );
+    else if( count === 4 ) {
+      setImageSrc( '/images/reveal-black.jpg' );
       setAnimate( false );
       switchSound.play();
       setCount(0);
       setButtonText('Pull the trigger!');
     }
-  }, [count, imageSrc]);
+  }, [count]);
 
   useEffect(()=>{
     console.log(`imageSrc updated to: ${ imageSrc }`);

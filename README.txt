@@ -1,9 +1,10 @@
-import React from 'react';
+This is Farren Esman's final assessment for Macquarie University's Unit MMCC3045: Interactive Storytelling. 
 
-function left() {
-  return (
-    <div className="page-content">
-      <h1>Acknowledgements</h1>
+Please note:
+
+There are sound effects. Please turn on your speakers, but not too loud :)
+
+All unoriginal content has been attributed at the end of the "book". Here they are again:
       <p>To the original author, Arthur C. Clarke, for creating such inspiring pieces of science fiction.</p>
       <p>Clarke, Arthur C.. Childhood's End (Arthur C. Clarke Collection). RosettaBooks. Kindle Edition.</p>
       <p>This project was bootstrapped using <a href="https://github.com/facebook/create-react-app" target="_blank" rel="noopener noreferrer">create-react-app</a></p>
@@ -19,19 +20,8 @@ function left() {
         <li>Select sound courtesy of <a href="https://freesound.org/people/TiesWijnen/sounds/413310/" target="_blank" rel="noopener noreferrer">TiesWijnen</a></li>
         <li>Radio sound courtest of <a href="https://freesound.org/people/ERH/sounds/44808/" target="_blank" rel="noopener noreferrer">ERH</a></li>
       </ul>
-    </div>
-  );
-}
 
-function right() {
-  return (
-    <div className="page-content the-end">
-      <h1>THE END.</h1>
-    </div>
-  );
-}
 
-export {
-  left,
-  right
-}
+For any questions or concerns, please contact me at farren.esman@students.mq.edu.au
+
+The code used in this project is available here: https://github.com/FarrenRE/storytime

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UIfx from 'uifx';
 import pageTurnAudio from '../audio/page-turn.wav';
+import bookOpenAudio from '../audio/book-open.wav';
 import '../styles/Book.scss';
 import '../styles/Page.scss';
 import FlipPage from 'react-flip-page';
@@ -29,6 +30,7 @@ import {left as page14Left, right as page14Right} from './pages/14';
 import {left as page15Left, right as page15Right} from './pages/15';
 import {left as page16Left, right as page16Right} from './pages/16';
 import {left as page17Left, right as page17Right} from './pages/17';
+import {left as backCoverLeft, right as backCoverRight} from './pages/backcover';
 
 export default function Book() {
 
@@ -152,6 +154,11 @@ export default function Book() {
           <Spread
             left={ page17Left() }
             right={ page17Right() }
+          />,
+          <Spread
+            left={ backCoverLeft() }
+            right={ backCoverRight() }
+            backcover={true}
           />
         ]) );
         break;
@@ -169,6 +176,10 @@ export default function Book() {
   const pageTurnSound = new UIfx(
     pageTurnAudio,
     { volume: 0.4 }
+  );
+  const bookOpenSound = new UIfx(
+    bookOpenAudio,
+    { volume: 0.8 }
   );
 
   return (
@@ -189,10 +200,9 @@ export default function Book() {
           onStartPageChange={(i, d) => { 
             console.log(`onStartPageChange() | oldIndex: ${i}, dir: ${d}`);
             if( ( i === 0 && d === 'next' ) || ( i === 1 && d === 'prev' ) ) {
-              // console.log("don't play sound");
+              bookOpenSound.play();
             }
             else {
-              // console.log('play sound');
               pageTurnSound.play();
             }
           }}

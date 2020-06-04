@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import UIfx from 'uifx';
+import selectAudio from '../audio/select-soft.mp3';
 import '../styles/Chat.scss';
 
 import ChatMessage from './ChatMessage.js';
@@ -15,6 +17,11 @@ export default function Chat(props) {
 
   const dialogueScript = props.dialogue;
   const logging = false;
+
+  const selectSound = new UIfx(
+    selectAudio,
+    { volume: 0.5 }
+  );
 
     // render option-less message chain
     const renderScriptedMessages = useCallback(() => {
@@ -96,6 +103,7 @@ export default function Chat(props) {
    */
   function onDialogueOptionSelect(e) {
     if(logging) {console.log('onDialogueOptionSelect()');}
+    selectSound.play();
     // set values
     const message = e.target.getAttribute("data-dialogue-message");
     const weight = e.target.getAttribute("data-dialogue-weight");
@@ -150,6 +158,7 @@ export default function Chat(props) {
     props.getChatWeight(dialogueChoiceWeights);
     // close chat
     props.setChatDisplay(0);
+    selectSound.play();
   }
 
   return (

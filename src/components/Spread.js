@@ -24,7 +24,7 @@ export default function Spread(props) {
   }
 
   return (
-    <div className={ `spread ${ props.cover ? "cover" : "" }` }>
+    <div className={ `spread ${ props.cover ? "cover" : "" } ${ props.backcover ? "back-cover" : "" }` }>
       <div className="leaf leaf--left">
         <Page>
           { props.left }
