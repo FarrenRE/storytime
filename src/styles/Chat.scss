@@ -30,21 +30,21 @@
 }
 
 .ChatMessage + .ChatMessage[data-author="Karellen"] {
-  animation-delay: 2s;
+  animation-delay: 1s;
   & + .ChatMessage[data-author="Karellen"] {
-    animation-delay: 4s;
+    animation-delay: 2s;
     & + .ChatMessage[data-author="Karellen"] {
-      animation-delay: 6s;
+      animation-delay: 3s;
     }
   }
 }
 
 .ChatMessage + .ChatMessage[data-author="Wainwright"] {
-  animation-delay: 2s;
+  animation-delay: 1s;
   & + .ChatMessage[data-author="Wainwright"] {
-    animation-delay: 4s;
+    animation-delay: 2s;
     & + .ChatMessage[data-author="Wainwright"] {
-      animation-delay: 6s;
+      animation-delay: 3s;
     }
   }
 }

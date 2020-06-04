@@ -10,6 +10,7 @@ body, html {
 
 .button {
   cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
   padding: 0.5rem;
   text-decoration: none;
   transition: .2s all;
@@ -23,7 +24,6 @@ body, html {
 .dialogue-button {
   background: lightgrey;
   color: black;
-  font-family: 'Press Start 2P', monospace;
 
   &:hover {
     background: #222;
@@ -34,7 +34,6 @@ body, html {
 .dialogue-button__inverted {
   background: #222;
   color: lime;
-  font-family: 'Press Start 2P', monospace;
 
   &:hover {
     background: lightgrey;

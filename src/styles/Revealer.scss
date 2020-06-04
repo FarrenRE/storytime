@@ -1,0 +1,37 @@
+.Revealer {
+  display: block;
+  position: relative;
+}
+
+.image-reveal {
+  display: block;
+  position: relative;
+}
+
+.animate-reveal::after {
+  background: black;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
+  animation: reveal 1.5s ease-out forwards;
+}
+
+.button--trigger {
+  background: #333;
+  color: lime;
+  text-align: center;
+
+  &:hover {
+    background: #999
+  }
+}
+
+@keyframes reveal {
+  0% { background: rgba(0, 0, 0, 1) }
+  75% { background: rgba(255, 255, 255, .15) }
+  100% { background: rgba(0, 0, 0, 1) }
+}
