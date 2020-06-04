@@ -1,4 +1,5 @@
 import React from 'react';
+import Revealer from '../Revealer';
 
 function left() {
   return (
@@ -13,18 +14,7 @@ function left() {
 function right() {
   return (
     <div className="page-content">
-      <span className="image-reveal">
-        <img 
-          className="page-image" 
-          alt="Karellen revealed" 
-          src={process.env.PUBLIC_URL + '/images/reveal-body.jpg'}
-          id="reveal-first" />
-        <img 
-          className="page-image" 
-          alt="Karellen revealed" 
-          src={process.env.PUBLIC_URL + '/images/reveal-face.jpg'}
-          id="reveal-second" />
-      </span>
+      <Revealer />
     </div>
   );
 }
